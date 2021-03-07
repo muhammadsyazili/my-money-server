@@ -57,7 +57,8 @@ class TransactionController extends Controller
         } catch (QueryException $qe) {
             return response()->json([
                 'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
-                'message' => "Failed $qe->errorInfo"
+                'message' => "Failed $qe->errorInfo",
+                'data' => null
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -114,7 +115,8 @@ class TransactionController extends Controller
         } catch (QueryException $qe) {
             return response()->json([
                 'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
-                'message' => "Failed $qe->errorInfo"
+                'message' => "Failed $qe->errorInfo",
+                'data' => null
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
