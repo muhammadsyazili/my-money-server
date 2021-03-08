@@ -36,13 +36,18 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'integer'],
             'title' => ['required'],
             'amount' => ['required', 'numeric'],
             'type' => ['required', 'in:expense,revenue']
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+            return response()->json([
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                'message' => 'Transaction unprocessable',
+                'data' => $validator->errors()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         try {
@@ -94,13 +99,18 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'integer'],
             'title' => ['required'],
             'amount' => ['required', 'numeric'],
             'type' => ['required', 'in:expense,revenue']
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+            return response()->json([
+                'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                'message' => 'Transaction unprocessable',
+                'data' => $validator->errors()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         try {
