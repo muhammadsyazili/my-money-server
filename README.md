@@ -4,7 +4,7 @@
 ### Create Transaction
 Request :
 - Method : POST
-- Endpoint : `/transaction`
+- Endpoint : `/api/transaction`
 - Authorization : Bearer Token
 - Header : 
     - Content-Type : application/json
@@ -12,6 +12,7 @@ Request :
 - Body :
 ```json
 {
+    "user_id" : "required|integer",
     "title" : "string|required|max_length=255",
     "amount" : "numeric|required",
     "type" : "required|in:expense,revenue"
@@ -25,6 +26,7 @@ Response :
     "message" : "string",
     "data" : {
         "id" : "integer",
+        "user_id" : "integer",
         "title" : "string",
         "amount" : "numeric",
         "type" : "string"
@@ -35,7 +37,7 @@ Response :
 ### Get Transaction
 Request :
 - Method : GET
-- Endpoint : `/transaction/{transaction_id}`
+- Endpoint : `/api/transaction/{transaction_id}`
 - Authorization : Bearer Token
 - Header : 
     - Accept : application/json
@@ -47,6 +49,7 @@ Response :
     "message" : "string",
     "data" : {
         "id" : "integer",
+        "user_id" : "integer",
         "title" : "string",
         "amount" : "numeric",
         "type" : "string"
@@ -57,7 +60,7 @@ Response :
 ### Update Transaction
 Request :
 - Method : PUT
-- Endpoint : `/transaction/{transaction_id}`
+- Endpoint : `/api/transaction/{transaction_id}`
 - Authorization : Bearer Token
 - Header : 
     - Content-Type : application/json
@@ -65,6 +68,7 @@ Request :
 - Body :
 ```json
 {
+    "user_id" : "required|integer",
     "title" : "string|required|max_length=255",
     "amount" : "numeric|required",
     "type" : "required|in:expense,revenue"
@@ -78,6 +82,7 @@ Response :
     "message" : "string",
     "data" : {
         "id" : "integer",
+        "user_id" : "integer",
         "title" : "string",
         "amount" : "numeric",
         "type" : "string"
@@ -88,7 +93,7 @@ Response :
 ### List Transaction
 Request :
 - Method : GET
-- Endpoint : `/transaction`
+- Endpoint : `/api/transaction`
 - Authorization : Bearer Token
 - Header : 
     - Accept : application/json
@@ -100,14 +105,11 @@ Response :
     "message" : "string",
     "data" : [
         {
-            "status" : "integer",
-            "message" : "string",
-            "data" : {
-                "id" : "integer",
-                "title" : "string",
-                "amount" : "numeric",
-                "type" : "string"
-            }
+            "id" : "integer",
+            "user_id" : "integer",
+            "title" : "string",
+            "amount" : "numeric",
+            "type" : "string"
         }
     ]
 }
@@ -116,7 +118,7 @@ Response :
 ### Delete Transaction
 Request :
 - Method : DELETE
-- Endpoint : `/transaction/{transaction_id}`
+- Endpoint : `/api/transaction/{transaction_id}`
 - Authorization : Bearer Token
 - Header : 
     - Accept : application/json
